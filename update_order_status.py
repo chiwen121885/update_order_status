@@ -48,13 +48,13 @@ while True:
 
             # Step 1: 更新訂單狀態為 completed
             patch_status_url = f"{API_BASE_URL}/orders/{order_id}/status"
-            patch_status_payload = {"status": "completed"}
+            patch_status_payload = {"status": "confirmed"}
             patch_status_response = requests.patch(patch_status_url, headers=headers, json=patch_status_payload)
 
             if patch_status_response.status_code == 200:
                 # Step 2: 更新為 collected
                 patch_delivery_status_url = f"{API_BASE_URL}/orders/{order_id}/order_delivery_status"
-                patch_delivery_status_payload = {"status": "collected"}
+                patch_delivery_status_payload = {"status": "shipped"}
                 patch_delivery_status_response = requests.patch(patch_delivery_status_url, headers=headers, json=patch_delivery_status_payload)
 
                 if patch_delivery_status_response.status_code == 200:
